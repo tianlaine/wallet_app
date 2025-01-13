@@ -1,0 +1,10 @@
+# Настройки подключения к базе данных PostgreSQL
+url=jdbc:postgresql://localhost:5432/wallet_db
+username=postgres
+password=123
+
+# Путь к файлам миграций
+changeLogFile=changelog.xml
+
+# Логирование
+logLevel=info
