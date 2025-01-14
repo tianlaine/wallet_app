@@ -24,10 +24,6 @@ class Config:
     # По умолчанию используется значение "False".
     DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1")
 
-    # Секретный ключ, используемый для криптографических операций, таких как подпись JWT или CSRF-токенов.
-    # Значение по умолчанию — "super-secret-key", но в production его нужно обязательно заменить.
-    SECRET_KEY = os.getenv("SECRET_KEY", "super-secret-key")
-
     # Настройки базы данных
     # Имя пользователя базы данных, по умолчанию "postgres".
     DB_USER = os.getenv("DB_USER", "postgres")
@@ -56,7 +52,3 @@ class Config:
 
     # Минимальное количество подключений к базе данных. Значение по умолчанию — 1.
     MIN_CONNECTIONS = int(os.getenv("MIN_CONNECTIONS", 1))
-
-    # Переменная среды, указывающая режим работы приложения: development, production и т.д.
-    # По умолчанию — "development".
-    ENV = os.getenv("ENV", "development")

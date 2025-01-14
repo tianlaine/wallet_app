@@ -3,6 +3,12 @@ services:
     build:  
       context: .
       dockerfile: Dockerfile
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: 123
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: postgres
     ports:
       - "8000:8000"
     depends_on:
@@ -15,14 +21,3 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
-  liquibase:
-    image: liquibase/liquibase:latest
-    environment:
-      - LIQUIBASE_URL=jdbc:postgresql://db:5432/postgres
-      - LIQUIBASE_USERNAME=postgres
-      - LIQUIBASE_PASSWORD=123
-      - LIQUIBASE_CHANGELOG_FILE=/liquibase/changelog.xml
-    volumes:
-      - ./migrations/liquibase:/liquibase
-    depends_on:
-      - db
