@@ -1,9 +1,13 @@
-"""Данныц файл нужен для определения структуры базы данных, тут описываются таблицы как python-классы (модели)"""
+"""Данный файл нужен для определения структуры базы данных, тут описываются таблицы как python-классы (модели)"""
 
 
 # Импортируем `create_engine` для подключения к базе данных и
 # `Column`, `Integer`, `String` для описания столбцов таблицы.
 from sqlalchemy import create_engine, Column, Integer, String
+
+# Импортируем тип для колонки `uuid`
+from sqlalchemy.dialects.postgresql import UUID
+
 # Импортируем `declarative_base`, чтобы создать базовый класс для всех моделей.
 from sqlalchemy.orm import declarative_base
 # Импортируем функцию `uuid4`, чтобы генерировать уникальные идентификаторы (UUID) для кошельков.
@@ -20,5 +24,5 @@ Base = declarative_base()
 class Wallet(Base): # Представляет таблицу wallets в базе данных.
     __tablename__ = "wallets" # Название таблицы в базе данных.
     id = Column(Integer, primary_key=True, index=True) # первичный ключ таблицы.
-    uuid = Column(String, unique=True, index=True, default=lambda: str(uuid4())) # уникальный идентификатор кошелька.
+    uuid = Column(UUID(as_uuid=True), unique=True, index=True, nullable=False) # уникальный идентификатор кошелька.
     balance = Column(Integer, default=0) # текущий баланс кошелька.

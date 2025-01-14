@@ -17,7 +17,13 @@ def process_operation(db: Session, wallet_uuid: str, operation: OperationSchema)
 
     # Если кошелёк не найден, возвращаем `False`.
     if not wallet:
-        return False
+        if operation.operationType == "DEPOSIT":
+            wallet = Wallet(uuid=wallet_uuid, balance=0)  # Создаем новый кошелек с балансом 0
+            db.add(wallet)  # Добавляем новый кошелек в сессию
+            db.commit()  # Сохраняем изменения в базе данных
+            db.refresh(wallet)  # Обновляем объект `wallet`
+        else:
+            return False
 
     # Если тип операции — DEPOSIT (пополнение), увеличиваем баланс кошелька на указанную сумму.
     if operation.operationType == "DEPOSIT":
