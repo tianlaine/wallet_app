@@ -29,8 +29,8 @@ docker pull cr.yandex/mirror/python:3.9-slim
 
 ```bash
 curl -X POST "http://localhost:8000/api/v1/wallets/496aa349-c5fc-40fc-b9f3-9831ce907d50/operation" \
-           -H "Content-Type: application/json" \x
-           -d '{"operationType": "DEPOSIT", "amount": 10000}'
+           -H "Content-Type: application/json" \
+           -d '{"operationType": "DEPOSIT", "amount": 1000}'
 ```
 
 Для снятия:
@@ -44,5 +44,5 @@ curl -X POST "http://localhost:8000/api/v1/wallets/496aa349-c5fc-40fc-b9f3-9831c
 Для проверки баланса:
 
 ```bash
-curl -X GET "http://localhost:8000/api/v1/wallets/496aa349-c5fc-40fc-b9f3-9831ce907"
+curl -X GET "http://localhost:8000/api/v1/wallets/496aa349-c5fc-40fc-b9f3-9831ce907d50"
 ```
